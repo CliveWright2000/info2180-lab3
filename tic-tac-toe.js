@@ -12,6 +12,8 @@ window.addEventListener('DOMContentLoaded', () => {
             newBox.setAttribute('class', 'square');
             board.appendChild(newBox);
             newBox.addEventListener('click', clickSq);
+            newBox.addEventListener('mouseover', mouseHover);
+            newBox.addEventListener('mouseout', mouseOff);
         }
         
         /*const sqContent = document.querySelector('.square');
@@ -35,22 +37,35 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 let tracker = ['','','','','','','','',''];
-let currPlayer = 'x';
+let currPlayer = 'X';
 
 function clickSq(clickEvent) {
     var clicked = clickEvent.target;
-    if (currPlayer == 'x' && clicked.textContent == '') {
-        clicked.textContent = "x";
+    if (currPlayer == 'X' && clicked.textContent == '') {
+        clicked.textContent = currPlayer;
         clicked.classList.add(currPlayer);
-        tracker.splice(parseInt(clicked.id), 1, "x");
-        currPlayer = 'o';
+        tracker.splice(parseInt(clicked.id), 1, currPlayer);
+        currPlayer = 'O';
 
     }
-    if ((currPlayer == 'o' && clicked.textContent == '')) {
-        clicked.textContent = 'o';
+    if ((currPlayer == 'O' && clicked.textContent == '')) {
+        clicked.textContent = currPlayer;
         clicked.classList.add(currPlayer);
-        tracker.splice(parseInt(clicked.id), 1, "o");
-        currPlayer = 'x';
+        tracker.splice(parseInt(clicked.id), 1, currPlayer);
+        currPlayer = 'X';
     }
+}
+
+function mouseHover(hoverEvent) {
+    var overSq = hoverEvent.target;
+    overSq.classList.add('hover');
+    if (overSq.textContent == 'O') {
+        overSq.classList.add('O');
+    }
+}
+
+function mouseOff(offEvent) {
+    var offSq = offEvent.target;
+    offSq.classList.remove('hover');
 }
 
