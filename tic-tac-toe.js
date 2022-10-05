@@ -1,20 +1,27 @@
 //"use strict";
+var gamePlayed = false;
 
 window.addEventListener('DOMContentLoaded', () => {
     const board = document.querySelector('#board');
     const newGameBtn = document.querySelector('.btn');
-    
+
     newGameBtn.addEventListener('click', e => {
         e.preventDefault();
-        for (var i = 0; i <= 8; i++) {
-            let newBox = document.createElement('div');
-            newBox.id = ""+i;
-            newBox.setAttribute('class', 'square');
-            board.appendChild(newBox);
-            newBox.addEventListener('click', clickSq);
-            newBox.addEventListener('mouseover', mouseHover);
-            newBox.addEventListener('mouseout', mouseOff);
+        if (gamePlayed === false) {
+            for (var i = 0; i <= 8; i++) {
+                let newBox = document.createElement('div');
+                newBox.id = ""+i;
+                newBox.setAttribute('class', 'square');
+                board.appendChild(newBox);
+                newBox.addEventListener('click', clickSq);
+                newBox.addEventListener('mouseover', mouseHover);
+                newBox.addEventListener('mouseout', mouseOff);
+            }
+        } else {
+            restartGame();
+            newGameBtn.clickEvent;
         }
+        gamePlayed = true;
         
         /*const sqContent = document.querySelector('.square');
         sqContent.addEventListener('click', e => {
@@ -83,6 +90,7 @@ const winConditions = [
 
 function checkWin() {
     let gameWon = false;
+    gamePlayed = true;
     for (var i = 0; i<=7; i++) {
         const winCondition = winConditions[i];
         const x = tracker[winCondition[0]];
@@ -116,5 +124,20 @@ function declareWin() {
 function declareTie() {
     var message = document.getElementById('status');
     message.textContent = "Oh No! You tied. Click New Game to play again.";
+}
+
+function restartGame() {
+    var sqContent = document.getElementsByClassName('square');
+    for (var i = 0; i<=8; i++) {
+        sqContent[i].classList.remove('O');
+        sqContent[i].classList.remove('X'); 
+        sqContent[i].textContent = ''; 
+    }
+
+    var message = document.getElementById('status');
+    message.classList.remove('you-won');
+    message.textContent = "Move your mouse over a square and click to play an X or an O";
+    gamePlayed = false;
+    tracker = ['','','','','','','','',''];
 }
 
