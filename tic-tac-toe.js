@@ -45,13 +45,14 @@ function clickSq(clickEvent) {
         clicked.textContent = currPlayer;
         clicked.classList.add(currPlayer);
         tracker.splice(parseInt(clicked.id), 1, currPlayer);
+        checkWin();
         currPlayer = 'O';
-
     }
     if ((currPlayer == 'O' && clicked.textContent == '')) {
         clicked.textContent = currPlayer;
         clicked.classList.add(currPlayer);
         tracker.splice(parseInt(clicked.id), 1, currPlayer);
+        checkWin();
         currPlayer = 'X';
     }
 }
@@ -67,5 +68,53 @@ function mouseHover(hoverEvent) {
 function mouseOff(offEvent) {
     var offSq = offEvent.target;
     offSq.classList.remove('hover');
+}
+
+const winConditions = [
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    [0,4,8],
+    [2,4,6]
+];
+
+function checkWin() {
+    let gameWon = false;
+    for (var i = 0; i<=7; i++) {
+        const winCondition = winConditions[i];
+        const x = tracker[winCondition[0]];
+        const y = tracker[winCondition[1]];
+        const z = tracker[winCondition[2]];
+        if (x === '' || y === '' || z === '') {
+            continue;
+        }
+        if (x === y && y === z) {
+            gameWon = true;
+            break;
+        }
+    }
+
+    if (gameWon) {
+        declareWin();
+        return true;
+    }
+
+    if (!tracker.includes('')) {
+        declareTie();
+    }
+}
+
+function declareWin() {
+    var message = document.getElementById('status');
+    message.classList.add('you-won');
+    message.textContent = "Congratulations! " +currPlayer+ " is the Winner!";
+}
+
+function declareTie() {
+    var message = document.getElementById('status');
+    message.textContent = "Oh No! You tied. Click New Game to play again.";
 }
 
