@@ -1,4 +1,3 @@
-//"use strict";
 var gamePlayed = false;
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -21,24 +20,7 @@ window.addEventListener('DOMContentLoaded', () => {
             restartGame();
             newGameBtn.clickEvent;
         }
-        gamePlayed = true;
-        
-        /*const sqContent = document.querySelector('.square');
-        sqContent.addEventListener('click', e => {
-        e.preventDefault;
-        if (currPlayer == 'x') {
-            sqContent.textContent = "x";
-            sqContent.setAttribute('class', 'square.x');
-            tracker.splice(parseInt(sqContent.id), 1, "x");
-            currPlayer = 'y';
-
-        } else {
-            sqContent.textContent = 'o';
-            sqContent.setAttribute('class', 'square.o');
-            tracker.splice(parseInt(sqContent.id), 1, "o");
-            currPlayer = 'x';
-        }
-    });*/
+        gamePlayed = true;s
     });
 
 });
