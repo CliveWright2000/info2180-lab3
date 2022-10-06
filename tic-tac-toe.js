@@ -20,7 +20,7 @@ window.addEventListener('DOMContentLoaded', () => {
             restartGame();
             newGameBtn.clickEvent;
         }
-        gamePlayed = true;s
+        gamePlayed = true;
     });
 
 });
